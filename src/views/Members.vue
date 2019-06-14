@@ -1,14 +1,15 @@
+
 <template>
   <div>
     <v-toolbar flat color="white">
-      <v-toolbar-title>Teams Manager</v-toolbar-title>
+      <v-toolbar-title>Team Members</v-toolbar-title>
       <v-divider
         class="mx-2"
         inset
         vertical
       ></v-divider>
       <v-spacer></v-spacer>
-      <v-btn @click="$refs.NewTeam.toggle()" color="success">New</v-btn>
+      <v-btn @click="$refs.NewMember.toggle()" color="success">New</v-btn>
     </v-toolbar>
     <v-data-table
       :headers="headers"
@@ -35,19 +36,20 @@
         </td>
       </template>
     </v-data-table>
-    <new-team-modal ref="NewTeam"></new-team-modal>
+    <new-member-modal ref="NewMember"></new-member-modal>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-import NewTeamModal from '@/components/NewTeamModal'
+import NewMemberModal from '@/components/NewMemberModal'
+
   export default {
     data: () => ({
       dialog: false,
       headers: [
         {
-          text: 'Team',
+          text: 'Member',
           align: 'left',
           sortable: false,
           value: 'name'
@@ -65,7 +67,7 @@ import NewTeamModal from '@/components/NewTeamModal'
     }),
 
     components: {
-        NewTeamModal
+       NewMemberModal 
     },
 
     watch: {
@@ -92,13 +94,13 @@ import NewTeamModal from '@/components/NewTeamModal'
       initialize () {
         this.files = [
           {
-            name: 'Team A',
+            name: 'Mohammad Siavashi',
           },
           {
-            name: 'Team B',
+            name: 'Ahmad Siavashi',
           },
           {
-            name: 'Team C',
+            name: 'Testing List',
           },
         ]
       },
@@ -106,7 +108,7 @@ import NewTeamModal from '@/components/NewTeamModal'
       editItem (item) {
         this.editedIndex = this.desserts.indexOf(item)
         this.editedItem = Object.assign({}, item)
-        this.dialog = true
+        this.$refs.dialog = true
       },
 
       deleteItem (item) {
